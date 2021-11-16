@@ -69,9 +69,9 @@ exports.sass = buildStyle;
 function buildScript() {
   return gulp.src('./src/js/**/*.js')
     .pipe($.sourcemaps.init())
-    .pipe($.babel(
-      { presets: ['@babel/env'] }
-    ))
+    // .pipe($.babel(
+    //   { presets: ['@babel/env'] }
+    // ))
     // .pipe($.concat('all.js'))
     .pipe($.if(opts.env === 'production', $.uglify({
       compress: {

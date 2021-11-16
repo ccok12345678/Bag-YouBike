@@ -1,1 +1,0 @@
-export const blue = '布魯斯';

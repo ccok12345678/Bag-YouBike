@@ -1,5 +1,9 @@
-import { blue } from './modules/test.js';
+import showMap from "./modules/map.js";
 
-const orange = '阿橘';
 
-console.log(`${orange}和${blue}`);
+
+init();
+
+function init() {
+  showMap()
+}
