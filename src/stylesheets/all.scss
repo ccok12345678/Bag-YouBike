@@ -1,4 +1,5 @@
 // Configuration
+// @import "bootstrap";
 @import "functions";
 @import "helpers/variables";
 @import "mixins";
@@ -8,9 +9,9 @@
 @import "root";
 @import "reboot";
 @import "type";
-// @import "images";
-@import "containers";
-@import "grid";
+@import "images";
+// @import "containers";
+// @import "grid";
 // @import "tables";
 // @import "forms";
 // @import "buttons";
@@ -42,6 +43,11 @@
 
 // Utilities
 @import "utilities/api";
+
+// font-awesome
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css");
+// bootstrap icon
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css");
 
 // custom
 @import "custom";

@@ -1,0 +1,13 @@
+.hover-bg {
+
+  &-primary:hover {
+    background: $primary;
+  }
+  &-light:hover {
+    background: $light;
+  }
+}
+
+.bd-filter {
+  backdrop-filter: blur(8px);
+}
