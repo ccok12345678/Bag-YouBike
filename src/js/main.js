@@ -1,14 +1,23 @@
-import showMap from "./modules/map.js";
-import toggleCover from './modules/toggleCover.js'
+// import showMap from "./modules/map.js";
+import getPosition from './modules/getPosition.js';
+import toggleCover from './modules/toggleCover.js';
+import getBikeStation from './modules/getBikeStation.js';
 
 document.addEventListener('click', (e) => {
   toggleCover(e);
 })
 
+const stationInfo = document.querySelector('#stationInfo');
+stationInfo.addEventListener('click', (e) => {
+  getBikeStation();
+})
+
+
 init();
 
 function init() {
-  showMap()
+  // showMap()
+  getPosition();
 }
 
 // bs tooltip

@@ -1,7 +1,16 @@
-export default function showMap() {
+import getPosition from "./getPosition.js";
+
+export default function showMap(lat, long) {
+
+  if(!(lat && long)) {
+    alert('無法取得您的位置')
+    lat = 23.973837;
+    long = 120.97969;
+  }
+
   // 設定地圖物件
   const map = L.map('map', {
-    center: [24.6870676,120.9073661], // 地圖中心座標 => 取得使用者位置
+    center: [lat, long], // 地圖中心座標 => 取得使用者位置
     zoom: 16,                          // zoom 比例
     zoomControl: false,
   })

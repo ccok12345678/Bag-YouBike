@@ -88,10 +88,12 @@ exports.babel = buildScript;
 // 第三方套件
 function vendorJS() {
   return gulp.src([
-    './node_modules/bootstrap/dist/js/bootstrap.min.js'
+    './node_modules/bootstrap/dist/js/bootstrap.min.js',
+    './node_modules/axios/dist/axios.min.js'
   ])
   .pipe($.order([
-    'bootstrap.min.js'
+    'bootstrap.min.js',
+    'axios.min.js'
   ]))
   .pipe($.concat('vendor.js'))
   .pipe($.if(opts.env === 'production', $.uglify()))
