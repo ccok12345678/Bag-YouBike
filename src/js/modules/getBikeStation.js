@@ -1,29 +1,17 @@
-import GetAuthorizationHeader from './getAurthor.js';
+import showStationData from "./showStation.js";
 
+export default function getBikeStation(map) {
 
-export default function getBikeStation() {
+  map.locate({
+    enableHighAccurcy: true,
+  }).on('locationfound', obj => {
+    const [lat, long] = [obj.latlng.lat, obj.latlng.lng];
 
-  navigator.geolocation.getCurrentPosition(success, error);
-
-}
-
-function success(position) {
-  const lat = position.coords.latitude;
-  const long = position.coords.longitude;
-
-  axios({
-    method: 'get',
-    baseURL: 'https://ptx.transportdata.tw/MOTC/',
-    url: `v2/Bike/Availability/NearBy?$top=30&$spatialFilter=nearby(${lat}%2C${long}%2C%201000)&$format=JSON`,
-    headers: GetAuthorizationHeader()
+    showStationData(lat, long, map);
   })
-    .then(res => {
-      console.log(res.data);
-    })
-    .catch(err => console.log(err));
-
+  .on('locationerror', err => {
+    alert('無法取得您的位置，請開啟定位功能');
+    console.warn(err.message);
+  });
 }
 
-function error(err) {
-  console.warn(err.message);
-}

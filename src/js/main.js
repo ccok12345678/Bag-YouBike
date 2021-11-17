@@ -2,9 +2,10 @@ import toggleCover from './modules/toggleCover.js';
 import showMap from './modules/showMap.js';
 import getBikeStation from './modules/getBikeStation.js';
 
-// map here
-// 讓map可以傳入每一個function
-const map = L.map('map');
+// map object
+const map = L.map('map', {
+  closePopupOnClick: false
+});
 
 // eventListener
 document.addEventListener('click', (e) => {
@@ -13,10 +14,10 @@ document.addEventListener('click', (e) => {
 
 const stationInfo = document.querySelector('#stationInfo');
 stationInfo.addEventListener('click', (e) => {
-  getBikeStation();
+  getBikeStation(map);
 })
 
-
+// init
 init();
 
 function init() {

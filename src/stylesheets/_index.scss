@@ -26,3 +26,28 @@
   right: 0;
   background: rgba(0, 0, 0, .7);
 }
+
+.leaflet-popup {
+
+  &-tip {
+    display: none;
+  }
+
+  &-content {
+    margin: 0;
+    color: $primary;
+    
+    &-wrapper {
+      text-align: center;
+      background: none;
+      box-shadow: none;
+      border: none;
+      padding: 0;
+      font-size: 20px;
+      font-weight: 900;
+      font-style: italic;
+      outline: none;
+    
+    }
+  }
+}
