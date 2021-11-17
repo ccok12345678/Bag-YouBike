@@ -1,8 +1,12 @@
-// import showMap from "./modules/map.js";
-import getPosition from './modules/getPosition.js';
 import toggleCover from './modules/toggleCover.js';
+import showMap from './modules/showMap.js';
 import getBikeStation from './modules/getBikeStation.js';
 
+// map here
+// 讓map可以傳入每一個function
+const map = L.map('map');
+
+// eventListener
 document.addEventListener('click', (e) => {
   toggleCover(e);
 })
@@ -16,8 +20,7 @@ stationInfo.addEventListener('click', (e) => {
 init();
 
 function init() {
-  // showMap()
-  getPosition();
+  showMap(map)
 }
 
 // bs tooltip
