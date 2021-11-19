@@ -10,7 +10,7 @@ import hideCard from './modules/hideCard.js';
 const map = L.map('map', {
   closePopupOnClick: false
 });
-let markers = new L.layerGroup().addTo(map);
+const markers = new L.layerGroup().addTo(map);
 
 // eventListener
 const btnGroupBike = document.querySelector('#btnGroup-bike');
