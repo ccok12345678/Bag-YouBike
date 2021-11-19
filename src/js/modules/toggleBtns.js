@@ -1,5 +1,6 @@
 import getLocation from "./getlocation.js";
-import { showRentData, showReturnData } from "./showStation.js";
+import showRentData from "./showRentData.js";
+import showReturnData from "./showReturnData.js";
 import clearLayers from "./clearLayers.js";
 
 export default function toggleBtns(e, map, layerGroup) {
@@ -9,13 +10,14 @@ export default function toggleBtns(e, map, layerGroup) {
   if (e.target.id === 'btn-rentBike') {
     rentBtn.className ='btn btn-secondary text-primary fw-600 px-3 py-2';
     returnBtn.className = 'btn btn-primary fw-600 px-3 py-2';
+
     clearLayers(layerGroup);
     getLocation(map, layerGroup, showRentData);
   } else {
     rentBtn.className ='btn btn-primary fw-600 px-3 py-2';
     returnBtn.className = 'btn btn-secondary text-primary fw-600 px-3 py-2';
+
     clearLayers(layerGroup);
     getLocation(map, layerGroup, showReturnData);
-  
   }
 }
