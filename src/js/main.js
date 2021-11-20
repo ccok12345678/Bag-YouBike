@@ -24,10 +24,11 @@ const mapObj = document.querySelector('#map');
 // toggle
 document.addEventListener('click', e => {
   toggleCover(e);
+  hideCard(e);
+  
 })
 
 mapObj.addEventListener('click', e => {
-  hideCard(e);
 })
 
 // nav bar, close cover
@@ -51,16 +52,16 @@ btnGroupBike.addEventListener('click', e => {
 })
 
 // info card
-if (document.querySelector('.map-marker')) {
-  const mapMarkers = document.querySelectorAll('.map-marker');
-  mapMarkers.forEach(marker => {
-    marker.addEventListener('click', e => {
-      e.preventDefault();
-      console.log(e.target.id);
-      showCard(e);
-    })
-  })
-}
+// if (document.querySelector('.map-marker')) {
+//   const mapMarkers = document.querySelectorAll('.map-marker');
+//   mapMarkers.forEach(marker => {
+//     marker.addEventListener('click', e => {
+//       e.preventDefault();
+//       console.log(e.target.id);
+//       showCard(e);
+//     })
+//   })
+// }
 
 // search station
 citySelector.addEventListener('change', e => {

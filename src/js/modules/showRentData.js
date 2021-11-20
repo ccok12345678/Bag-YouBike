@@ -41,7 +41,6 @@ export default function showRentData(nowLat, nowLong, map, layerGroup, num = 30)
         let stationID = item.StationID;
         let lat = item.StationPosition.PositionLat;
         let long = item.StationPosition.PositionLon;
-        let i = 0;
         
         bikes.forEach(bike => {
           if (stationID === bike.StationID) {
@@ -49,7 +48,7 @@ export default function showRentData(nowLat, nowLong, map, layerGroup, num = 30)
             
             layerGroup.addLayer(
               L.marker([lat,long], { icon: rentIcon })
-              .bindPopup(`<a title="可借數量" href="#" id="${stationID}" data-marker="marker" class="map-marker text-primary text-decoration-none" data-item="card-item-${i}">${rentBike}</a>`, {
+              .bindPopup(`<a title="可借數量" href="#" id="${stationID}" data-marker="marker" class="map-marker text-primary text-decoration-none" data-stationid="${stationID}">${rentBike}</a>`, {
                 minWidth: 0,
                 closeButton: false,
                 autoClose: false,
@@ -57,23 +56,24 @@ export default function showRentData(nowLat, nowLong, map, layerGroup, num = 30)
               })
               .on("add", event => {
                 event.target.openPopup();
+
+                const mapMarkers = document.querySelectorAll('.map-marker');
+                  mapMarkers.forEach(marker => {
+                    marker.addEventListener('click', e => {
+                      e.preventDefault();
+            
+                      showCard(e);
+                    })
+                  })
+
               }))
             }
 
-          i++;
         })
         
       })
       layerGroup.addTo(map);
 
-      const mapMarkers = document.querySelectorAll('.map-marker');
-      mapMarkers.forEach(marker => {
-        marker.addEventListener('click', e => {
-          e.preventDefault();
-
-          showCard(e);
-        })
-      })
     }))
     .catch(err => console.log(err));
 }

@@ -38,7 +38,6 @@ export default function showReturnData(nowLat, nowLong, map, layerGroup) {
         let stationID = item.StationID;
         let lat = item.StationPosition.PositionLat;
         let long = item.StationPosition.PositionLon;
-        let i = 0;
         
         bikes.forEach(bike => {
           if (stationID === bike.StationID) {
@@ -46,7 +45,7 @@ export default function showReturnData(nowLat, nowLong, map, layerGroup) {
 
             layerGroup.addLayer(
               L.marker([lat,long], { icon: returnIcon })
-                .bindPopup(`<a title="可還車位" href="#" id="${stationID}" data-marker="marker" class="map-marker text-secondary text-decoration-none" data-item="card-item-${i}">${returnBike}</a>`, {
+                .bindPopup(`<a title="可還車位" href="#" id="${stationID}" data-marker="marker" class="map-marker text-secondary text-decoration-none" data-stationid="${stationID}"">${returnBike}</a>`, {
                   minWidth: 0,
                   closeButton: false,
                   autoClose: false,
@@ -54,23 +53,24 @@ export default function showReturnData(nowLat, nowLong, map, layerGroup) {
                 })
                 .on("add", event => {
                   event.target.openPopup();
+                  
+                  const mapMarkers = document.querySelectorAll('.map-marker');
+                  mapMarkers.forEach(marker => {
+                    marker.addEventListener('click', e => {
+                      e.preventDefault();
+            
+                      showCard(e);
+                    })
+                  })
+
             }))
           }
 
-          i++;
         })
         
       })
       layerGroup.addTo(map);
 
-      const mapMarkers = document.querySelectorAll('.map-marker');
-      mapMarkers.forEach(marker => {
-        marker.addEventListener('click', e => {
-          e.preventDefault();
-
-          showCard(e);
-        })
-      })
 
     }))
     .catch(err => console.log(err));

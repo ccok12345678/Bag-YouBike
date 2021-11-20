@@ -95,6 +95,8 @@ export default function makeInfoCards(stations, bikes, isRent) {
       </div>
     `;
     i++;
+
+    console.log('cards made')
   })
   cardContainer.innerHTML = cardContent;
   

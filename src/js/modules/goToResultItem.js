@@ -55,7 +55,7 @@ export default function goToResultItem(stationData, map, layerGroup) {
                 if (station.StationID === id) {
 
                   L.marker([lat, lon], { icon: rentIcon })
-                  .bindPopup(`<a title="可借數量" href="#" id="${id}" data-marker="marker" class="map-marker text-primary text-decoration-none" data-item="card-item-search">${rentBike}</a>`, {
+                  .bindPopup(`<a title="可借數量" href="#" data-marker="marker" class="map-marker text-primary text-decoration-none" data-stationid="${id}">${rentBike}</a>`, {
                     minWidth: 0,
                     closeButton: false,
                     autoClose: false,
@@ -63,15 +63,18 @@ export default function goToResultItem(stationData, map, layerGroup) {
                   })
                   .on("add", event => {
                     event.target.openPopup();
+
+                    const mapMarkers = document.querySelectorAll('.map-marker');
+                  mapMarkers.forEach(marker => {
+                    marker.addEventListener('click', e => {
+                      e.preventDefault();
+            
+                      showCard(e);
+                    })
+                  })
+
                   }).addTo(map);
         
-                  
-                  const mapMarker = document.querySelector('.map-marker');
-                  mapMarker.addEventListener('click', e => {
-                    e.preventDefault();
-                    showCard(e);
-                    console.log('show card');
-                  })
                 }
               })
 
