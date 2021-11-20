@@ -1,0 +1,15 @@
+{
+  "counties": [
+    { "zh": "臺北市", "en": "Taipei" },
+    { "zh": "新北市", "en": "NewTaipei" },
+    { "zh": "桃園市", "en": "Taoyuan" },
+    { "zh": "新竹市", "en": "Hsinchu" },
+    { "zh": "苗栗縣", "en": "MiaoliCounty" },
+    { "zh": "臺中市", "en": "Taichung" },
+    { "zh": "嘉義市", "en": "Chiayi" },
+    { "zh": "高雄市", "en": "Kaohsiung" },
+    { "zh": "臺南市", "en": "Tainan" },
+    { "zh": "屏東縣", "en": "PingtungCounty" },
+    { "zh": "金門縣", "en": "KinmenCounty" }
+  ]
+}

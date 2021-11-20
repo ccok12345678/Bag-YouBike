@@ -29,9 +29,9 @@ exports.clean = clean;
 function buildTemplate() {
   return gulp.src('./src/**/*.pug')
     .pipe($.data(() => {
-      const menu = require('./src/data/menu.json');
+      const selection = require('./src/data/selection.json');
       const data = {
-        menu,
+        selection,
       }
       return data;
     }))
