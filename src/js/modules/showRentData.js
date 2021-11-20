@@ -3,7 +3,7 @@ import makeInfoCards from './makeINfoCards.js';
 import showCard from './showCard.js';
 
 
-export default function showRentData(nowLat, nowLong, map, layerGroup) {
+export default function showRentData(nowLat, nowLong, map, layerGroup, num = 30) {
   
   // custom icon
   const Icon = L.Icon.extend({
@@ -18,13 +18,13 @@ export default function showRentData(nowLat, nowLong, map, layerGroup) {
   const requestStation = axios({
     method: 'get',
     baseURL: 'https://ptx.transportdata.tw/MOTC/',
-    url: `v2/Bike/Station/NearBy?$top=30&$spatialFilter=nearby(${nowLat},${nowLong},1000)&$format=JSON`,
+    url: `v2/Bike/Station/NearBy?$top=${num}&$spatialFilter=nearby(${nowLat},${nowLong},1000)&$format=JSON`,
     headers: GetAuthorizationHeader()    
   });
   const requestAvailability = axios({
     method: 'get',
     baseURL: 'https://ptx.transportdata.tw/MOTC/',
-    url: `v2/Bike/Availability/NearBy?$top=30&$spatialFilter=nearby(${nowLat},${nowLong},1000)&$format=JSON`,
+    url: `v2/Bike/Availability/NearBy?$top=${num}&$spatialFilter=nearby(${nowLat},${nowLong},1000)&$format=JSON`,
     headers: GetAuthorizationHeader() 
   });
 
@@ -70,6 +70,7 @@ export default function showRentData(nowLat, nowLong, map, layerGroup) {
       mapMarkers.forEach(marker => {
         marker.addEventListener('click', e => {
           e.preventDefault();
+
           showCard(e);
         })
       })

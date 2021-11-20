@@ -5,6 +5,7 @@ import showRentData from './modules/showRentData.js';
 import toggleBtns from './modules/toggleBtns.js';
 import showCard from './modules/showCard.js';
 import hideCard from './modules/hideCard.js';
+import searchStation from './modules/searchStation.js';
 
 // map object
 const map = L.map('map', {
@@ -16,22 +17,26 @@ const markers = new L.layerGroup().addTo(map);
 const btnGroupBike = document.querySelector('#btnGroup-bike');
 const stationInfo = document.querySelector('#stationInfo');
 const navBarBtn = document.querySelectorAll('.nav-link');
-const stationLocation = document.querySelector('#stationLocation');
+const citySelector = document.querySelector('#citySelector');
+const searchStationBtn = document.querySelector('#searchStationBtn');
+const mapObj = document.querySelector('#map');
 
 // toggle
 document.addEventListener('click', e => {
   toggleCover(e);
+})
+
+mapObj.addEventListener('click', e => {
   hideCard(e);
 })
 
-// nav bar
+// nav bar, close cover
 navBarBtn.forEach(btn => {
   btn.addEventListener('click', e => {
     if (e.target.id !== 'stationInfo')
     btnGroupBike.className = 'btn-group visually-hidden';
   })
 })
-
 
 // station info
 stationInfo.addEventListener('click', e => {
@@ -57,10 +62,15 @@ if (document.querySelector('.map-marker')) {
   })
 }
 
+// search station
+citySelector.addEventListener('change', e => {
+  e.preventDefault();
+  searchStation(map, markers);
+})
 
-stationLocation.addEventListener('click', e => {
-  e.preventDefault()
-
+searchStationBtn.addEventListener('click', e => {
+  e.preventDefault();
+  searchStation(map, markers);
 })
 
 // init

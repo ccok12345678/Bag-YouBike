@@ -19,7 +19,6 @@ export default function makeInfoCards(stations, bikes, isRent) {
     });
   })
   
-  console.log(cards);
   let cardContent = '';
   let i = 0;
   

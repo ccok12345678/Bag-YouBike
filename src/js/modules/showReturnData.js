@@ -67,6 +67,7 @@ export default function showReturnData(nowLat, nowLong, map, layerGroup) {
       mapMarkers.forEach(marker => {
         marker.addEventListener('click', e => {
           e.preventDefault();
+
           showCard(e);
         })
       })

@@ -2,19 +2,14 @@ include ../mixins/citiesOptions.pug
 
 aside#offcanvasForSearch.offcanvas.offcanvas-start(data-bs-scroll='true' data-bs-backdrop='false' tabindex='1' aria-labelledby='offcanvasScrollingLabel')
   .offcanvas-header.p-3.pb-4.border-bottom
-    form.w-100.d-flex.flex-row
-      label.visually-hidden(for="searchStation") 搜尋公用腳踏車站點 
-      input.form-control.mt-4.ps-4.py-3.lh-1(type="search" id="searchStation" placeholder="搜尋站點關鍵字")
-      select.form-select.mt-4.mb-3p-3.ms-1.w-45
+    form#searchForm.w-100.d-flex.flex-row
+      label.visually-hidden(for="searchKeyword") 搜尋公用腳踏車站點 
+      input#searchKeyword.form-control.mt-4.ps-4.py-3.lh-1(type="text" placeholder="搜尋站點關鍵字" name="searchKeyword")
+      select#citySelector.form-select.mt-4.mb-3p-3.ms-1.w-45
         option(value="" selected disable="true") 區域
         each item in selection.counties
           +citiesOptions(item.zh, item.en)
-      button.visually-hidden(type="submit") 搜尋
-  .offcanvas-body.p-0
+      button#searchStationBtn.visually-hidden(type="submit") 搜尋
+  .offcanvas-body.p-0.overflow-auto
     #searchResultContainer.list-group.rounded-0.border-0
-      a.list-group-item.list-group-item-action.border-0.border-bottom.p-3.pe-4.d-flex.flex-column(href='#')
-        h5.fs-16.fw-600 iBike1.0_市政府(文心樓)
-        p.text-info.fs-12.lh-sm.mt-auto.mb-0 台中市文心路二段645號旁
-      a.list-group-item.list-group-item-action.border-0.border-bottom.p-3.pe-4.d-flex.flex-column(href='#') 
-        h5.fs-16.fw-600 iBike1.0_市政府(文心樓的隔壁棟樓的B2)
-        p.text-info.fs-12.lh-sm.mt-auto.mb-0 台中市文心路二段645號旁，牆上有一隻小花貓他會帶你去目的地
+  
