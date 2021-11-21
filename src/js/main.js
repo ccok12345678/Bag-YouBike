@@ -3,9 +3,9 @@ import showMap from './modules/showMap.js';
 import getLocation from './modules/getlocation.js';
 import showRentData from './modules/showRentData.js';
 import toggleBtns from './modules/toggleBtns.js';
-import showCard from './modules/showCard.js';
 import hideCard from './modules/hideCard.js';
 import searchStation from './modules/searchStation.js';
+import clearLayers from './modules/clearLayers.js';
 
 // map object
 const map = L.map('map', {
@@ -28,9 +28,6 @@ document.addEventListener('click', e => {
   
 })
 
-mapObj.addEventListener('click', e => {
-})
-
 // nav bar, close cover
 navBarBtn.forEach(btn => {
   btn.addEventListener('click', e => {
@@ -42,35 +39,27 @@ navBarBtn.forEach(btn => {
 // station info
 stationInfo.addEventListener('click', e => {
   e.preventDefault();
+  clearLayers(markers);
   getLocation(map, markers, showRentData);
   btnGroupBike.className = 'btn-group';
 
 })
 btnGroupBike.addEventListener('click', e => {
   e.preventDefault();
+  clearLayers(markers);
   toggleBtns(e, map, markers);
 })
-
-// info card
-// if (document.querySelector('.map-marker')) {
-//   const mapMarkers = document.querySelectorAll('.map-marker');
-//   mapMarkers.forEach(marker => {
-//     marker.addEventListener('click', e => {
-//       e.preventDefault();
-//       console.log(e.target.id);
-//       showCard(e);
-//     })
-//   })
-// }
 
 // search station
 citySelector.addEventListener('change', e => {
   e.preventDefault();
+  clearLayers(markers);
   searchStation(map, markers);
 })
 
 searchStationBtn.addEventListener('click', e => {
   e.preventDefault();
+  clearLayers(markers);
   searchStation(map, markers);
 })
 
@@ -78,7 +67,7 @@ searchStationBtn.addEventListener('click', e => {
 init();
 
 function init() {
-  showMap(map)
+  getLocation(map, markers, showMap)
 }
 
 // bs tooltip

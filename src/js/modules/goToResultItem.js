@@ -11,7 +11,7 @@ const Icon = L.Icon.extend({
 
 const rentIcon = new Icon({iconUrl: 'images/rent_icon.png'});
 
-export default function goToResultItem(stationData, map, layerGroup) {
+export default function goToResultItem(stationData, map) {
   const resultItems = document.querySelectorAll('.searchResultItem');
   resultItems.forEach(item => {
     item.addEventListener('click', e => {
@@ -28,12 +28,6 @@ export default function goToResultItem(stationData, map, layerGroup) {
       let position = [lat, lon];
       map.setView(position, 16);
 
-      
-      // show rent data & marker
-      
-      // showRentData(lat, lon, map, layerGroup, 3);
-
-
       const id = e.target.dataset.stationid;
       const city = document.querySelector('#citySelector').value;
 
@@ -45,12 +39,12 @@ export default function goToResultItem(stationData, map, layerGroup) {
       })
         .then(res => {
           const bikes = res.data;
-          
-          makeInfoCards(stationData, bikes, true);
+          const bikeData = [];
           
           bikes.forEach(bike => {
             let rentBike = bike.AvailableRentBikes;
             if (bike.StationID === id) {
+              bikeData.push(bike)
               stationData.forEach(station => {
                 if (station.StationID === id) {
 
@@ -80,6 +74,8 @@ export default function goToResultItem(stationData, map, layerGroup) {
 
             }
           })
+          
+          makeInfoCards(stationData, bikeData, true);
           
         })
         .catch(err => console.log(err));

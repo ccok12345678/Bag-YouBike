@@ -6,8 +6,6 @@ export default function hideCard(e) {
   cards.forEach(card => {
     if (itemID !== card.getAttribute('data-id')) {
       card.className = 'card shadow pt-3 pb-4 px-4 visually-hidden';
-
-      console.log('hide card');
     };
 
   })

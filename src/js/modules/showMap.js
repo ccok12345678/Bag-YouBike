@@ -1,21 +1,16 @@
 import currentSpot from "./currentSpot.js";
 
-export default function showMap(map) {
-    
-  map.locate({
-    enableHighAccurcy: true,
-  }).on('locationfound', obj => {
-    const location = [obj.latlng.lat, obj.latlng.lng];
+export default function showMap(lat, long, map) {
 
-    currentSpot(location, map)
-    map.setView(location, 16);    
-  })
-  .on('locationerror', err => {
-    alert('無法取得您的位置，請開啟定位功能');
-    console.warn(err.message);
-    map.setView([22.9925951,120.2050199], 16);
-  });
-  
+  if (typeof(map) === undefined) {
+    map = L.map('map', {
+      closePopupOnClick: false
+    });
+  }
+
+  map.setView([lat, long], 16);
+  currentSpot([lat, long], map)
+
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
       maxZoom: 20,
