@@ -1,0 +1,36 @@
+include ../mixins/citiesOptions.pug
+
+aside#offcanvasForRoute.offcanvas.offcanvas-start(data-bs-scroll='true' data-bs-backdrop='false' tabindex='1' aria-labelledby='offcanvasScrollingLabel')
+  .offcanvas-header.p-3.pb-4.border-bottom
+    form#routeSearch.w-100.d-flex.flex-column
+      .d-flex
+        select#citySelectorForRoute.form-select.mt-4.mb-3.p-2.w-50.text-info
+          option(value="" selected disable="true") 選擇縣市
+          each item in selection.counties
+            +citiesOptions(item.zh, item.en)
+        select#townSelector.form-select.mt-4.mb-3.p-2.w-50.ms-1.text-info
+          option(value="" selected disable="true") 鄉鎮區
+      .d-flex.text-info
+        .form-check
+          input#oneway.form-check-input(type='checkbox' value='oneway')
+          label.form-check-label(for='oneway')
+            | 單向
+        .form-check.ms-3
+          input#towway.form-check-input(type='checkbox' value='towway')
+          label.form-check-label(for='towway')
+            | 雙向
+      button#searchRouteBtn.visually-hidden(type="submit") 搜尋
+  .offcanvas-body.p-0.overflow-auto
+    #routeResultContainer.list-group.rounded-0.border-0
+      //- a.searchResultItem.list-group-item.list-group-item-action.border-0.border-bottom.p-3.pe-4(href='#' title='顯示路線位置')
+      //-   h5.fw-700.fs-14.mb-0() 中科自行車道(中科路)
+      //-   p.fw-500.fs-14.mb-0() 起點：東大路
+      //-   p.fw-500.fs-14.mb-0() 終點：科園三路北側約300米
+      //-   small.fs-12 2800m
+      //-   small.fs-12.text-info.ms-4 單向・雙向
+      //- a.searchResultItem.list-group-item.list-group-item-action.border-0.border-bottom.p-3.pe-4(href='#' title='顯示路線位置')
+      //-   h5.fw-700.fs-14.mb-0() 中科自行車道(中科路)
+      //-   p.fw-500.fs-14.mb-0() 起點：東大路
+      //-   p.fw-500.fs-14.mb-0() 終點：科園三路北側約300米
+      //-   small.fs-12 2800m
+      //-   small.fs-12.text-info.ms-4 單向・雙向

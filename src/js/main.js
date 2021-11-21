@@ -6,6 +6,7 @@ import toggleBtns from './modules/toggleBtns.js';
 import hideCard from './modules/hideCard.js';
 import searchStation from './modules/searchStation.js';
 import clearLayers from './modules/clearLayers.js';
+import searchRoute from './modules/searchRoute.js';
 
 // map object
 const map = L.map('map', {
@@ -19,7 +20,8 @@ const stationInfo = document.querySelector('#stationInfo');
 const navBarBtn = document.querySelectorAll('.nav-link');
 const citySelector = document.querySelector('#citySelector');
 const searchStationBtn = document.querySelector('#searchStationBtn');
-const mapObj = document.querySelector('#map');
+// const mapObj = document.querySelector('#map');
+const citySelectorRoute = document.querySelector('#citySelectorForRoute');
 
 // toggle
 document.addEventListener('click', e => {
@@ -61,6 +63,12 @@ searchStationBtn.addEventListener('click', e => {
   e.preventDefault();
   clearLayers(markers);
   searchStation(map, markers);
+})
+
+// route search
+citySelectorRoute.addEventListener('change', e => {
+  e.preventDefault();
+  searchRoute();
 })
 
 // init
