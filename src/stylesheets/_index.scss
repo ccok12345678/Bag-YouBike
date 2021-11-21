@@ -82,3 +82,19 @@
 .list-group-item {
   min-height: 97px;
 }
+
+.inforationItem {
+  min-height: 97px;
+}
+
+.slideAnswerContainer {
+  position: absolute;
+  top: 0px;
+  left: 397px;
+  width: 321px;
+  z-index: 4;
+  transition: all .3s;
+}
+.hideAnswer {
+  transform: translate(0, -100%);
+}

@@ -29,6 +29,9 @@ const searchStationBtn = document.querySelector('#searchStationBtn');
 // const mapObj = document.querySelector('#map');
 const citySelectorRoute = document.querySelector('#citySelectorForRoute');
 const bikeRouteSearch = document.querySelector('#bikeRouteSearch');
+const informationItems =　document.querySelectorAll('.informationItem');
+const slideForAnswer = document.querySelector('#slideForAnswer');
+const navInfo = document.querySelector('#websiteInfo');
 
 // toggle
 document.addEventListener('click', e => {
@@ -75,10 +78,27 @@ searchStationBtn.addEventListener('click', e => {
 })
 
 // route search
-
 citySelectorRoute.addEventListener('change', e => {
   e.preventDefault();
   searchRoute();
+})
+
+// information
+informationItems.forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+
+    if (slideForAnswer.className === 'slideAnswerContainer vh-100 bg-white hideAnswer') {
+      slideForAnswer.className = 'slideAnswerContainer vh-100 bg-white';
+    } else {
+      slideForAnswer.className = 'slideAnswerContainer vh-100 bg-white hideAnswer';
+    }
+  })
+})
+
+navInfo.addEventListener('click', e => {
+  e.preventDefault();
+  slideForAnswer.className = 'slideAnswerContainer vh-100 bg-white hideAnswer';
 })
 
 // init

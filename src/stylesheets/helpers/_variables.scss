@@ -1068,8 +1068,8 @@ $form-validation-states: (
 $zindex-dropdown:                   1000 !default;
 $zindex-sticky:                     1020 !default;
 $zindex-fixed:                      1030 !default;
-$zindex-offcanvas-backdrop:         1040 !default;
-$zindex-offcanvas:                  1;  // 1045 !default;
+$zindex-offcanvas-backdrop:         1; // 1040 !default;
+$zindex-offcanvas:                  3;  // 1045 !default;
 $zindex-modal-backdrop:             1050 !default;
 $zindex-modal:                      1055 !default;
 $zindex-popover:                    1070 !default;

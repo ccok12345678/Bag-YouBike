@@ -18,7 +18,7 @@ export default function searchRouteInTown(routeData) {
     let start = route.RoadSectionStart || '無資料';
     let end = route.RoadSectionEnd || '無資料';
     let length = route.CyclingLength + 'm' || '';
-    let direction = route.Direction || '無資料';
+    let direction = route.Direction || '';
     let routeSection = route.Geometry || '無資料';
 
     routes += `
