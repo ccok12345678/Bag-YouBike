@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Design by Yuco, build by Karl Yang, ccok12345678@hotmail.com.">
+    <meta name="description" content="The F2E 3rd前端修練精神時光屋作品，自行車道地圖資訊整合網。資料來源:TDX, https://tdx.transportdata.tw/">
+    <meta name="keywords" content="Taiwan, bike, bicycle, map, 臺灣, 台灣, 腳踏車, 自行車, 運動, 假日行程">
+    <meta property="og:image" content="images/og_icon.png">
+    <meta property="og:description" content="來自前端修練精神時光屋The F2E 3rd，臺灣觀光旅遊景點導覽。">
+    <meta property="og:title" content="袋你去騎車 Bag YouBike">
+    <meta name="twitter:title" content="袋你去騎車 Bag YouBike">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <title>袋你去騎車 Bag YouBike</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="">
+    <link rel="stylesheet" href="stylesheets/all.css">
+  </head>
+  <body>
+    <div class="appMap vh-100 vw-100" id="map"></div>
+    <header class="cover d-flex"><img class="img-fluid m-auto" src="images/slogan_lg.png" alt="Let's go cycling!" width="284"></header>
+    <ul class="nav nav-tabs flex-column bg-white fs-27 shadow" id="navBar">
+      <li class="nav-item">
+        <div class="nav-link d-flex border-0 rounded-0 align-items-center" data-bs-toggle="tooltip" data-bs-placement="right" title="我是一隻袋鼠，我帶你去騎車"><img src="images/nav_logo.svg" alt="a kangaroo logo" data-toggle="toggleCover">
+          <h1 class="visually-hidden">袋你去騎車 Bag YouBike</h1>
+        </div>
+      </li>
+      <li class="nav-item"><a class="nav-link d-flex border-0 hover-bg-primary rounded-0" id="stationInfo" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="單車租借"><i class="bi bi-geo-alt m-auto"></i></a></li>
+      <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="點擊查詢指定站點"><a class="nav-link d-flex border-0 hover-bg-primary rounded-0" id="stationLocation" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasForSearch" aria-controls="offcanvasScrolling"><i class="bi bi-search m-auto"></i></a></li>
+      <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="自行車道路查詢"><a class="nav-link d-flex border-0 hover-bg-primary rounded-0" id="bikeRouteSearch" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasForRoute" aria-controls="offcanvasScrolling"><i class="fas fa-biking m-auto"></i></a></li>
+      <li class="nav-item mt-auto" data-bs-toggle="tooltip" data-bs-placement="right" title="相關資訊"><a class="nav-link d-flex border-0 hover-bg-primary rounded-0" id="websiteInfo" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasForInfo" aria-controls="offcanvasScrolling"><i class="bi bi-info-circle m-auto"></i></a></li>
+    </ul>
+    <div class="btn-group visually-hidden" id="btnGroup-bike" role="group" aria-label="Basic example">
+      <button class="btn btn-secondary text-primary fw-600 px-3 py-2" id="btn-rentBike" type="button">租車</button>
+      <button class="btn btn-primary fw-600 px-3 py-2" id="btn-returnBike" type="button">還車</button>
+    </div>
+    <section class="card-container" id="cardContainer"></section>
+    <aside class="offcanvas offcanvas-start" id="offcanvasForSearch" data-bs-scroll="true" data-bs-backdrop="false" tabindex="1" aria-labelledby="offcanvasScrollingLabel">
+      <div class="offcanvas-header p-3 pb-4 border-bottom">
+        <form class="w-100 d-flex flex-row" id="searchForm">
+          <label class="visually-hidden" for="searchKeyword">搜尋公用腳踏車站點 </label>
+          <input class="form-control mt-4 ps-4 py-3 lh-1" id="searchKeyword" type="text" placeholder="搜尋站點關鍵字" name="searchKeyword">
+          <select class="form-select mt-4 mb-3p-3 ms-1 w-45" id="citySelector">
+            <option value="" selected disable="true">區域</option>
+                <option value="Taipei">臺北市</option>
+                <option value="NewTaipei">新北市</option>
+                <option value="Taoyuan">桃園市</option>
+                <option value="Hsinchu">新竹市</option>
+                <option value="MiaoliCounty">苗栗縣</option>
+                <option value="Taichung">臺中市</option>
+                <option value="Chiayi">嘉義市</option>
+                <option value="Kaohsiung">高雄市</option>
+                <option value="Tainan">臺南市</option>
+                <option value="PingtungCounty">屏東縣</option>
+                <option value="KinmenCounty">金門縣</option>
+          </select>
+          <button class="visually-hidden" id="searchStationBtn" type="submit">搜尋</button>
+        </form>
+      </div>
+      <div class="offcanvas-body p-0 overflow-auto">
+        <div class="list-group rounded-0 border-0" id="searchResultContainer"></div>
+      </div>
+    </aside>
+    <aside class="offcanvas offcanvas-start" id="offcanvasForRoute" data-bs-scroll="true" data-bs-backdrop="false" tabindex="1" aria-labelledby="offcanvasScrollingLabel">
+      <div class="offcanvas-header p-3 pb-4 border-bottom">
+        <form class="w-100 d-flex flex-column" id="routeSearch">
+          <div class="d-flex">
+            <select class="form-select mt-4 mb-3 p-2 w-50 text-info" id="citySelectorForRoute">
+              <option value="" selected disable="true">選擇縣市</option>
+                  <option value="Taichung">臺中市</option>
+                  <option value="Keelung">基隆市</option>
+                  <option value="HsinchuCounty">新竹縣</option>
+                  <option value="MiaoliCounty">苗栗縣</option>
+                  <option value="ChanghuaCounty">彰化縣</option>
+                  <option value="NewTaipei">新北市</option>
+                  <option value="NantouCounty">南投縣</option>
+                  <option value="YunlinCounty">雲林縣</option>
+                  <option value="ChiayiCounty">嘉義縣</option>
+                  <option value="Chiayi">嘉義市</option>
+                  <option value="PingtungCounty">屏東縣</option>
+                  <option value="YilanCounty">宜蘭縣</option>
+                  <option value="HualienCounty">花蓮縣</option>
+                  <option value="TaitungCounty">臺東縣</option>
+                  <option value="KinmenCounty">金門縣</option>
+                  <option value="PenghuCounty">澎湖縣</option>
+                  <option value="Taoyuan">桃園市</option>
+                  <option value="Taipei">臺北市</option>
+                  <option value="Kaohsiung">高雄市</option>
+                  <option value="Tainan">臺南市</option>
+            </select>
+            <select class="form-select mt-4 mb-3 p-2 w-50 ms-1 text-info" id="townSelector">
+              <option value="" selected disable="true">鄉鎮區</option>
+            </select>
+          </div>
+          <div class="d-flex text-info">
+            <div class="form-check">
+              <input class="form-check-input" id="oneway" type="checkbox" value="oneway" disabled>
+              <label class="form-check-label" for="oneway">單向</label>
+            </div>
+            <div class="form-check ms-3">
+              <input class="form-check-input" id="towway" type="checkbox" value="towway" disabled>
+              <label class="form-check-label" for="towway">雙向</label>
+            </div>
+          </div>
+          <button class="visually-hidden" id="searchRouteBtn" type="submit">搜尋</button>
+        </form>
+      </div>
+      <div class="offcanvas-body p-0 overflow-auto">
+        <div class="list-group rounded-0 border-0" id="routeResultContainer"></div>
+      </div>
+    </aside>
+    <aside class="offcanvas offcanvas-start" id="offcanvasForInfo" data-bs-scroll="true" data-bs-backdrop="true" tabindex="1" aria-labelledby="offcanvasScrollingLabel">
+      <div class="offcanvas-body p-0 overflow-auto">
+        <div class="list-group rounded-0 border-0" id="questionContainer">
+          <div class="list-group-item list-group-item-action p-3 border-0 border-bottom" href="#">
+            <h5 class="fs-15 fw-700 mb-2">常見問題</h5>
+            <p class="mb-2 text-info fs-12">更新日期：2021/11/13</p>
+          </div><a class="informationItem list-group-item list-group-item-action p-3 border-0 border-bottom" href="#">
+            <h5 class="fs-15 fw-700 mb-2">問題類型第一層 - 常見問題集合</h5>
+            <p class="mb-2 fs-12">我該如何使用？</p>
+            <p class="mb-2 fs-12">如何找到離我最近的站點？</p>
+            <p class="mb-2 fs-12">我該如何使用？</p></a><a class="informationItem list-group-item list-group-item-action p-3 border-0 border-bottom" href="#">
+            <h5 class="fs-15 fw-700 mb-2">問題類型第一層 - 常見問題集合</h5>
+            <p class="mb-2 fs-12">我該如何使用？</p>
+            <p class="mb-2 fs-12">如何找到離我最近的站點？</p>
+            <p class="mb-2 fs-12">我該如何使用？</p></a><a class="informationItem list-group-item list-group-item-action p-3 border-0 border-bottom" href="#">
+            <h5 class="fs-15 fw-700 mb-2">問題類型第一層 - 常見問題集合</h5>
+            <p class="mb-2 fs-12">我該如何使用？</p>
+            <p class="mb-2 fs-12">如何找到離我最近的站點？</p>
+            <p class="mb-2 fs-12">我該如何使用？</p></a>
+        </div>
+      </div>
+    </aside>
+    <div class="slideAnswerContainer vh-100 bg-white hideAnswer" id="slideForAnswer">
+      <div class="p-3">
+        <h5 class="fs-15 fw-700 pt-3 my-1">遇到問題我該找誰？這是第二層</h5>
+        <p class="fs-14 fw-500 pb-1"> 您可以透過以下方式聯繫到我們</p>
+        <p class="fs-14 mt-5"><i class="bi bi-telephone"> </i><strong class="ms-3 me-2 pe-1">電話</strong><a class="ls-145 fw-500 hover-noLine" href="tel:07-234-5678">07-234-5678</a><br><small class="mt-2">為了讓每一位騎乘者的問題得以解決，24小時皆有人員替您服務。</small></p>
+        <p class="fs-14 pb-1 mt-5"><i class="bi bi-envelope"></i><strong class="ms-3 me-2 pe-1">信箱</strong><a class="ls-145 fw-500 hover-noLine" href="email:service@kuokka.net">service@kuokka.net</a><br><small class="mt-2">我們會於收到信件後的24小時回覆您</small></p>
+        <h5 class="fs-15 fw-700 mt-5 pt-1">我到了該站點，站點卻是暫停使用的狀態時，我該怎麼辦？</h5>
+        <p class="mt-1"><small>請您來電 07-234-5678 將有專人協助您查詢離您最近的站點。</small></p>
+      </div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <script src="https://unpkg.com/@popperjs/core@2"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/3.2.0/sha.min.js"> </script>
+    <script src="js/vendor.js"> </script>
+    <script src="js/main.js" type="module"> </script>
+  </body>
+</html>
