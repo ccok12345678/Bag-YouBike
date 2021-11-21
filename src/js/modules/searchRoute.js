@@ -1,5 +1,6 @@
 import GetAuthorizationHeader from "./getAurthor.js";
 import searchRouteInTown from "./searchRouteInTown.js";
+import showRoute from "./showRoute.js";
 
 export default function searchRoute() {
 
@@ -39,16 +40,18 @@ export default function searchRoute() {
         let name = route.RouteName;
         let start = route.RoadSectionStart || '無資料';
         let end = route.RoadSectionEnd || '無資料';
-        let length = route.CyclingLength || '無資料';
+        let length = route.CyclingLength + 'm' || '';
         let direction = route.Direction || '無資料';
+        let routeSection = route.Geometry || '無資料';
 
         routes += `
-          <a href="#" class="searchResultItem list-group-item list-group-item-action border-0 border-bottom p-3 pe-4" title='顯示路線位置'>
-            <h5 class="fw-700 fs-14 mb-0">${name}</h5>
-            <p class="fw-500 fs-14 mb-0">起點：${start}</p>
-            <p class="fw-500 fs-14 mb-0">終點：${end}</p>
-            <small class="fs-12">${length}m</small>
-            <small class="fs-12 text-info ms-4">${direction}</small>
+          <a href="#" class="searchRouteResult list-group-item list-group-item-action border-0 border-bottom p-3 pe-4" title="顯示路線位置" data-section="${routeSection}">
+            <h5 class="fw-700 mb-1 fs-15 mb-0" data-section="${routeSection}">${name}</h5>
+            <p class="fw-500 fs-14 mb-0" data-section="${routeSection}">起點：${start}</p>
+            <p class="fw-500 mb-1 fs-14 mb-0" data-section="${routeSection}">終點：${end}</p>
+            <small class="fs-12 lh-sm" data-section="${routeSection}">${length}</small>
+            <small class="fs-12 lh-sm text-info ms-4" data-section="${routeSection}">${direction}</small>
+          </a>
         `;
 
       });
@@ -58,11 +61,29 @@ export default function searchRoute() {
       return routeData;
     })
     .then(data => {
+
+      const searchRouteResults = document.querySelectorAll('.searchRouteResult');
+      searchRouteResults.forEach(result => {
+        result.addEventListener('click', e => {
+          e.preventDefault()
+
+          // the show route function
+          showRoute(e);
+
+        })
+      })
+
       townSelector.addEventListener('change', e => {
         e.preventDefault();
         searchRouteInTown(data);
       })
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err)
+      routes = `<div class="alert alert-light text-center" role="alert">
+                  無資料
+                </div>`;
+      routeContainer.innerHTML = routes;
+    });
 
   }

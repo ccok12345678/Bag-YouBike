@@ -12,7 +12,13 @@ import searchRoute from './modules/searchRoute.js';
 const map = L.map('map', {
   closePopupOnClick: false
 });
+
 const markers = new L.layerGroup().addTo(map);
+
+L.control.zoom({
+  position: 'topright',
+}).addTo(map);
+
 
 // eventListener
 const btnGroupBike = document.querySelector('#btnGroup-bike');
@@ -22,6 +28,7 @@ const citySelector = document.querySelector('#citySelector');
 const searchStationBtn = document.querySelector('#searchStationBtn');
 // const mapObj = document.querySelector('#map');
 const citySelectorRoute = document.querySelector('#citySelectorForRoute');
+const bikeRouteSearch = document.querySelector('#bikeRouteSearch');
 
 // toggle
 document.addEventListener('click', e => {
@@ -33,18 +40,20 @@ document.addEventListener('click', e => {
 // nav bar, close cover
 navBarBtn.forEach(btn => {
   btn.addEventListener('click', e => {
+    e.preventDefault()
+    clearLayers(markers);
+
     if (e.target.id !== 'stationInfo')
-    btnGroupBike.className = 'btn-group visually-hidden';
+      btnGroupBike.className = 'btn-group visually-hidden';
+
   })
 })
 
 // station info
 stationInfo.addEventListener('click', e => {
   e.preventDefault();
-  clearLayers(markers);
   getLocation(map, markers, showRentData);
   btnGroupBike.className = 'btn-group';
-
 })
 btnGroupBike.addEventListener('click', e => {
   e.preventDefault();
@@ -66,6 +75,7 @@ searchStationBtn.addEventListener('click', e => {
 })
 
 // route search
+
 citySelectorRoute.addEventListener('change', e => {
   e.preventDefault();
   searchRoute();

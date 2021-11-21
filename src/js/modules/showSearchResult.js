@@ -1,14 +1,18 @@
 import goToResultItem from "./goToResultItem.js";
 
 export default function showSearchResult(stationData, map, layerGroup) {
-
+  const resultContainer = document.querySelector('#searchResultContainer');  
+  let result = '';
+  
   if (stationData.length === 0) {
-    alert('沒有相關資料');
+    result = `<div class="alert alert-light text-center" role="alert">
+                無資料
+              </div>
+    `;
+    resultContainer.innerHTML = result;
     return;
   }
 
-  const resultContainer = document.querySelector('#searchResultContainer');  
-  let result = '';
 
 
   stationData.forEach(station => {

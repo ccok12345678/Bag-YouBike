@@ -21,7 +21,4 @@ export default function showMap(lat, long, map) {
       accessToken: 'pk.eyJ1IjoiY2NvazEyMzQ1Njc4IiwiYSI6ImNrdm94Z3M2eDB1N2cycHFoeDl3cjdjZTUifQ.fjYGDdcuHXFwRD1Tc2yq6w'
   }).addTo(map);
 
-  L.control.zoom({
-    position: 'topright',
-  }).addTo(map);
 }
