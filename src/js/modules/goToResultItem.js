@@ -1,5 +1,5 @@
 import GetAuthorizationHeader from "./getAurthor.js";
-import makeInfoCards from "./makeINfoCards.js";
+import makeInfoCards from "./makeInfoCards.js";
 import showCard from "./showCard.js";
 
 const Icon = L.Icon.extend({

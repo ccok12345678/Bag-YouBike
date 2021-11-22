@@ -1,6 +1,6 @@
 import toggleCover from './modules/toggleCover.js';
 import showMap from './modules/showMap.js';
-import getLocation from './modules/getlocation.js';
+import getLocation from './modules/getLocation.js';
 import showRentData from './modules/showRentData.js';
 import toggleBtns from './modules/toggleBtns.js';
 import hideCard from './modules/hideCard.js';
