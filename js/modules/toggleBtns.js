@@ -1,4 +1,4 @@
-import getLocation from "./getlocation.js";
+import getLocation from "./getLocation.js";
 import showRentData from "./showRentData.js";
 import showReturnData from "./showReturnData.js";
 
