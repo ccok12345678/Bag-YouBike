@@ -1,0 +1,27 @@
+
+<aside class="offcanvas offcanvas-start" id="offcanvasForSearch" data-bs-scroll="true" data-bs-backdrop="false" tabindex="1" aria-labelledby="offcanvasScrollingLabel">
+  <div class="offcanvas-header p-3 pb-4 border-bottom">
+    <form class="w-100 d-flex flex-row" id="searchForm">
+      <label class="visually-hidden" for="searchKeyword">搜尋公用腳踏車站點 </label>
+      <input class="form-control mt-4 ps-4 py-3 lh-1" id="searchKeyword" type="text" placeholder="搜尋站點關鍵字" name="searchKeyword"/>
+      <select class="form-select mt-4 mb-3p-3 ms-1 w-45" id="citySelector">
+        <option value="" selected="selected" disable="true">區域</option>
+        <option value="Taipei">臺北市</option>
+        <option value="NewTaipei">新北市</option>
+        <option value="Taoyuan">桃園市</option>
+        <option value="Hsinchu">新竹市</option>
+        <option value="MiaoliCounty">苗栗縣</option>
+        <option value="Taichung">臺中市</option>
+        <option value="Chiayi">嘉義市</option>
+        <option value="Kaohsiung">高雄市</option>
+        <option value="Tainan">臺南市</option>
+        <option value="PingtungCounty">屏東縣</option>
+        <option value="KinmenCounty">金門縣</option>
+      </select>
+      <button class="visually-hidden" id="searchStationBtn" type="submit">搜尋</button>
+    </form>
+  </div>
+  <div class="offcanvas-body p-0 overflow-auto">
+    <div class="list-group rounded-0 border-0" id="searchResultContainer"></div>
+  </div>
+</aside>

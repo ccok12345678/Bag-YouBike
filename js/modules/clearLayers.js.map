@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["modules/clearLayers.js"],"sourcesContent":["export default function clearLayers(layerGroup) {\r\n  if (!!document.querySelector('.map-marker'))\r\n    layerGroup.clearLayers()\r\n}"],"file":"clearLayers.js"}

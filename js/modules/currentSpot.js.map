@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["modules/currentSpot.js"],"sourcesContent":["export default function currentSpot(location, map) {\r\n  L.marker(location, {\r\n    minWidth: 0,\r\n    closeButton: false,\r\n    autoClose: true\r\n  })\r\n    .addTo(map);\r\n}"],"file":"currentSpot.js"}
