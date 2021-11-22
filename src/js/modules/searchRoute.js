@@ -29,7 +29,6 @@ export default function searchRoute() {
       let options = [];
       let townOptions = '';
 
-      console.log(routeData);
       routeData.forEach(route => {
         let town = route.Town;
         if (!options.includes(town) && town !== undefined) {
