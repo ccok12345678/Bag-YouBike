@@ -1,4 +1,4 @@
-import showStationData from "showStation.js";
+import showStationData from "./showStation.js";
 
 export default function getBikeStation(map) {
 

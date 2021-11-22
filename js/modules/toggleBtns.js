@@ -1,6 +1,6 @@
-import getLocation from "getlocation.js";
-import showRentData from "showRentData.js";
-import showReturnData from "showReturnData.js";
+import getLocation from "./getlocation.js";
+import showRentData from "./showRentData.js";
+import showReturnData from "./showReturnData.js";
 
 export default function toggleBtns(e, map, layerGroup) {
   const rentBtn = document.querySelector('#btn-rentBike');

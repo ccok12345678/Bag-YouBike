@@ -1,6 +1,6 @@
-import GetAuthorizationHeader from "getAurthor.js";
-import searchRouteInTown from "searchRouteInTown.js";
-import showRoute from "showRoute.js";
+import GetAuthorizationHeader from "./getAurthor.js";
+import searchRouteInTown from "./searchRouteInTown.js";
+import showRoute from "./showRoute.js";
 
 export default function searchRoute() {
 

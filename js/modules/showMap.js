@@ -1,4 +1,4 @@
-import currentSpot from "currentSpot.js";
+import currentSpot from "./currentSpot.js";
 
 export default function showMap(lat, long, map) {
 

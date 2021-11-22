@@ -1,6 +1,6 @@
-import GetAuthorizationHeader from 'getAurthor.js';
-import makeInfoCards from 'makeINfoCards.js';
-import showCard from 'showCard.js';
+import GetAuthorizationHeader from './getAurthor.js';
+import makeInfoCards from './makeINfoCards.js';
+import showCard from './showCard.js';
 
 
 export default function showRentData(nowLat, nowLong, map, layerGroup, num = 30) {

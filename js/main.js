@@ -1,12 +1,12 @@
-import toggleCover from 'modules/toggleCover.js';
-import showMap from 'modules/showMap.js';
-import getLocation from 'modules/getlocation.js';
-import showRentData from 'modules/showRentData.js';
-import toggleBtns from 'modules/toggleBtns.js';
-import hideCard from 'modules/hideCard.js';
-import searchStation from 'modules/searchStation.js';
-import clearLayers from 'modules/clearLayers.js';
-import searchRoute from 'modules/searchRoute.js';
+import toggleCover from './modules/toggleCover.js';
+import showMap from './modules/showMap.js';
+import getLocation from './modules/getLocation.js';
+import showRentData from './modules/showRentData.js';
+import toggleBtns from './modules/toggleBtns.js';
+import hideCard from './modules/hideCard.js';
+import searchStation from './modules/searchStation.js';
+import clearLayers from './modules/clearLayers.js';
+import searchRoute from './modules/searchRoute.js';
 
 // map object
 const map = L.map('map', {

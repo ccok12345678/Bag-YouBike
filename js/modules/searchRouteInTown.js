@@ -1,4 +1,4 @@
-import showRoute from "showRoute.js";
+import showRoute from "./showRoute.js";
 
 
 export default function searchRouteInTown(routeData) {

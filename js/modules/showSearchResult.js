@@ -1,4 +1,4 @@
-import goToResultItem from "goToResultItem.js";
+import goToResultItem from "./goToResultItem.js";
 
 export default function showSearchResult(stationData, map, layerGroup) {
   const resultContainer = document.querySelector('#searchResultContainer');  

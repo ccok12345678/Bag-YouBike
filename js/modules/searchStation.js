@@ -1,5 +1,5 @@
-import GetAuthorizationHeader from "getAurthor.js";
-import showSearchResult from "showSearchResult.js";
+import GetAuthorizationHeader from "./getAurthor.js";
+import showSearchResult from "./showSearchResult.js";
 
 export default function searchStation(map, layerGroup) {
   const city = document.querySelector('#citySelector').value;
